@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="Sakib Rahman">
-  <title>Using UMSAP Compute Allocations</title>
+  <title>Raster Motion Study</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -28,40 +28,34 @@
     <div class="slides">
 
 <section>
-  <h1 class="title">Using UMSAP Compute Allocations</h1>
+  <h1 class="title">Raster Motion Study</h1>
   <h2 class="author">Sakib Rahman</h2>
-  <h3 class="date">27 April, 2020</h3>
+  <h3 class="date">29 April, 2020</h3>
 </section>
 
-<section><section id="disclaimer" class="titleslide slide level1"><h1>Disclaimer</h1></section><section id="disclaimer-1" class="slide level2">
-<h1>Disclaimer</h1>
+<section class="slide level2">
+
+<section data-background="images/Westgrid.jpg">
+</section>
+</section>
+<section><section id="rastered-case" class="titleslide slide level1"><h1>Rastered Case</h1></section><section id="simulation-setting" class="slide level2">
+<h1>Simulation Setting</h1>
 <ul>
-<li>Assuming basic knowledge of:
+<li>15 million events for moller and elastics each</li>
+<li>5x5 mm rastter, 0.065 mrad/mm angular correlation</li>
+<li>Configurations Tested (Only horizontal offsets i.e. motion along x-axis)
 <ul>
-<li>shell scripting (great)</li>
-<li>python (good)</li>
-<li>c++ (good)</li>
-<li>GEANT (evil)</li>
-<li>and ROOT (very evil)</li>
+<li>Beam Position Offsets: -2, -1, 0, 1, 2 mm</li>
+<li>Beam Angular Offsets: -1, -0.5, 0, 0.5, 1 mm</li>
 </ul></li>
-<li>This is a bird's eye view of what I find useful. Not covering everything because of shortage of time and my general lack of expertise.</li>
+<li>Implementation has magnetic field and detector plane positions shifted by the small distances. All analysis is conducted with the reasonable assumption that this is negligible.</li>
 </ul>
-</section></section>
-<section><section id="available-resources" class="titleslide slide level1"><h1>Available Resources</h1></section><section id="allocated-resource" class="slide level2">
-<h1>Allocated Resource</h1>
-<ul>
-<li>Beluga (rrg-jmammei)</li>
-<li>GREX</li>
-<li>JLAB Ifarm (moller12gev)</li>
-</ul>
-</section><section id="rapid-access-service" class="slide level2">
-<h1>Rapid Access Service</h1>
-<ul>
-<li>Cedar</li>
-<li>Niagara</li>
-<li>Graham</li>
-<li>Cloud (Not active right now)</li>
-</ul>
+</section><section id="illustration-of-a-position-offset" class="slide level2">
+<h1>Illustration of a Position Offset</h1>
+<p><a href="images/position.jpg"></a></p>
+</section><section id="illustration-of-an-angular-offset" class="slide level2">
+<h1>Illustration of an Angular Offset</h1>
+<p><a href="images/angle.jpg"></a></p>
 </section></section>
 <section><section id="how-to-get-access" class="titleslide slide level1"><h1>How to Get Access</h1></section><section id="compute-canada-services" class="slide level2">
 <h1>Compute Canada Services</h1>
