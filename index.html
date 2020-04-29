@@ -1,50 +1,217 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Sakib Rahman">
+  <title>Using UMSAP Compute Allocations</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href=".//css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href=".//css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? './/css/print/pdf.css' : './/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src=".//lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
 
-		<title>reveal.js</title>
+<section>
+  <h1 class="title">Using UMSAP Compute Allocations</h1>
+  <h2 class="author">Sakib Rahman</h2>
+  <h3 class="date">27 April, 2020</h3>
+</section>
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+<section><section id="disclaimer" class="titleslide slide level1"><h1>Disclaimer</h1></section><section id="disclaimer-1" class="slide level2">
+<h1>Disclaimer</h1>
+<ul>
+<li>Assuming basic knowledge of:
+<ul>
+<li>shell scripting (great)</li>
+<li>python (good)</li>
+<li>c++ (good)</li>
+<li>GEANT (evil)</li>
+<li>and ROOT (very evil)</li>
+</ul></li>
+<li>This is a bird's eye view of what I find useful. Not covering everything because of shortage of time and my general lack of expertise.</li>
+</ul>
+</section></section>
+<section><section id="available-resources" class="titleslide slide level1"><h1>Available Resources</h1></section><section id="allocated-resource" class="slide level2">
+<h1>Allocated Resource</h1>
+<ul>
+<li>Beluga (rrg-jmammei)</li>
+<li>GREX</li>
+<li>JLAB Ifarm (moller12gev)</li>
+</ul>
+</section><section id="rapid-access-service" class="slide level2">
+<h1>Rapid Access Service</h1>
+<ul>
+<li>Cedar</li>
+<li>Niagara</li>
+<li>Graham</li>
+<li>Cloud (Not active right now)</li>
+</ul>
+</section></section>
+<section><section id="how-to-get-access" class="titleslide slide level1"><h1>How to Get Access</h1></section><section id="compute-canada-services" class="slide level2">
+<h1>Compute Canada Services</h1>
+<ul>
+<li>Make a <a href="https://www.computecanada.ca/research-portal/account-management/apply-for-an-account/">compute canada account</a></li>
+<li>For GREX, you need to apply for a <a href="https://monitor.hpc.umanitoba.ca/doc/docs/grex/access/">westgrid consortium access</a> on your compute canada account</li>
+<li>For access to Niagara, you will need to <a href="https://docs.computecanada.ca/wiki/Niagara_Quickstart#Getting_started_on_Niagara">opt-in</a></li>
+<li>Same applies for creating <a href="https://docs.computecanada.ca/wiki/Cloud">cloud project</a></li>
+</ul>
+</section><section id="jefferson-lab-services" class="slide level2">
+<h1>Jefferson LAB services</h1>
+<ul>
+<li>Make a <a href="https://cc.jlab.org/useraccounts">jlab account</a></li>
+<li>You also automatically have access to <a href="https://vdi.jlab.org">jlab virtual machines</a></li>
+</ul>
+</section></section>
+<section><section id="logging-in" class="titleslide slide level1"><h1>Logging in</h1></section><section id="secure-shell" class="slide level2">
+<h1>Secure Shell</h1>
+<h3 id="linux-machines">Linux Machines</h3>
+<ul>
+<li>Beluga
+<ul>
+<li>ssh <code>&lt;username&gt;</code><span class="citation" data-cites="beluga.computecanada.ca">@beluga.computecanada.ca</span> -Y</li>
+<li>ssh <code>&lt;username&gt;</code><span class="citation" data-cites="beluga">@beluga</span><code>&lt;1/2/3/4&gt;</code> -Y</li>
+</ul></li>
+<li>GREX
+<ul>
+<li>ssh <code>&lt;username&gt;</code><span class="citation" data-cites="grex.westgrid.ca">@grex.westgrid.ca</span> -Y</li>
+</ul></li>
+</ul>
+</section><section id="secure-shell-continued" class="slide level2">
+<h1>Secure Shell (continued)</h1>
+<ul>
+<li>Cedar, Graham, Niagara
+<ul>
+<li>ssh <code>&lt;username&gt;</code>@<code>&lt;cedar/graham/niagara&gt;</code> .computecanada.ca -Y</li>
+</ul></li>
+<li>JLAB
+<ul>
+<li>ssh <code>&lt;username&gt;</code>@<code>login.jlab.org</code> -Y</li>
+<li>ssh <code>&lt;username&gt;</code>@<code>ifarm&lt;1901/1902/1801/1802&gt;</code> -Y</li>
+</ul></li>
+</ul>
+<h3 id="windows-machines">Windows Machines</h3>
+<ul>
+<li>Use <a href="https://www.putty.org/">putty</a> and <a href="https://sourceforge.net/projects/xming/">xming</a></li>
+</ul>
+</section><section id="file-transfers" class="slide level2">
+<h1>File Transfers</h1>
+<ul>
+<li>Preferably use <a href="https://globus.computecanada.ca/">globus</a></li>
+<li>sftp from linux machines (Compute canada uses the same server address as for SSH and jlab uses ftp.jlab.org)
+<ul>
+<li>lcd <code>&lt;local directory&gt;</code></li>
+<li>cd <code>&lt;remote directory&gt;</code></li>
+<li>put -r * [ Transfers from local to remote ]</li>
+<li>get -r * [ Transfers from remote to local ]</li>
+</ul></li>
+<li>psftp from windows machines</li>
+</ul>
+</section></section>
+<section><section id="running-simulation-jobs" class="titleslide slide level1"><h1>Running Simulation Jobs</h1></section><section id="beluga" class="slide level2">
+<h1>Beluga</h1>
+<ul>
+<li>source ~/projects/rrg-jmammei/REMOLL/environment/cedar<code>_</code>env.sh</li>
+<li>cd ~/projects/rrg-jmammei/REMOLL/job<code>_</code>submit</li>
+<li>./macro.py -h</li>
+<li>./macro.py -a rrg-jmammei -v develop -j ~/projects/rrg-jmammei/ REMOLL/raw<code>_</code>output/testStudy/jsub -t ~/projects/rrg-jmammei/ REMOLL/raw<code>_</code>output/testStudy/tmp -o ~/projects/rrg-jmammei/ REMOLL/raw<code>_</code>output/testStudy/scratch -d 28 --bhd 28 -n 1000 -r 1 --time 00:25:00</li>
+</ul>
+</section><section id="grex" class="slide level2">
+<h1>GREX</h1>
+<ul>
+<li>source /home/jmammei/REMOLL/environment/cedar<code>_</code>env.sh</li>
+<li>cd /home/jmammei/REMOLL/job<code>_</code>submit</li>
+<li>./macro.py -h</li>
+</ul>
+</section><section id="ifarm" class="slide level2">
+<h1>IFARM</h1>
+<ul>
+<li>source /apps/root/6.18.00/setroot<code>_</code>CUE</li>
+<li>source /site/12gev<code>_</code>phys/softenv.csh devel</li>
+<li>You can copy the macro.py script from beluga to ifarm. Change account to halla and parition to production. You will also need to setup the directory structure.</li>
+</ul>
+</section><section id="customisation" class="slide level2">
+<h1>Customisation</h1>
+<ul>
+<li>You can copy the submission script and customise it to your liking for different studies.</li>
+</ul>
+</section></section>
+<section><section id="analysis-remoll" class="titleslide slide level1"><h1>Analysis (REMOLL)</h1></section><section id="command-line" class="slide level2">
+<h1>Command Line</h1>
+<figure>
+<img src="images/Usage.jpg" alt="Plotting in ROOT command line" /><figcaption>Plotting in ROOT command line</figcaption>
+</figure>
+</section><section id="job-submission" class="slide level2">
+<h1>Job Submission</h1>
+<ul>
+<li>Same trick as before. Replace the simulation line with the appropriate analysis script. Example in GREX: /home/jmammei/REMOLL/analysis</li>
+</ul>
+</section></section>
+<section><section id="geometry-visualization" class="titleslide slide level1"><h1>Geometry Visualization</h1></section><section id="grex-1" class="slide level2">
+<h1>GREX</h1>
+<ul>
+<li><a href="https://monitor.hpc.umanitoba.ca/doc/docs/grex/connecting/x2go/">Xtogo</a></li>
+</ul>
+</section></section>
+<section><section id="geometry-development" class="titleslide slide level1"><h1>Geometry Development</h1></section><section id="gdml" class="slide level2">
+<h1>GDML</h1>
+<ul>
+<li>Language for writing geometric elements in geant4 simulations</li>
+<li><a href="http://lcgapp.cern.ch/project/simu/framework/GDML/doc/GDMLmanual.pdf">GDML User's Guide</a></li>
+</ul>
+</section><section id="parametrisation" class="slide level2">
+<h1>Parametrisation</h1>
+<ul>
+<li>Write your <a href="https://github.com/rahmans1/CoilGenerator/blob/feature-addShowerMax/showermaxgen.py">own python wrapper</a></li>
+<li>Steal somebody else's python wrapper <a href="http://www.pp.rhul.ac.uk/bdsim/pyg4ometry/tutorials.html">pyg4ometry package</a></li>
+</ul>
+</section></section>
+<section><section id="other-useful-references" class="titleslide slide level1"><h1>Other Useful References</h1></section><section id="quick-look-up" class="slide level2">
+<h1>Quick Look-Up</h1>
+<ul>
+<li><a href="https://slurm.schedmd.com/pdfs/summary.pdf">Slurm commands</a></li>
+<li><a href="https://rogerdudler.github.io/git-guide/">Github Commands</a></li>
+</ul>
+</section><section id="making-quick-presentations-in-command-line" class="slide level2">
+<h1>Making quick presentations in command line</h1>
+<ul>
+<li><a href="https://revealjs.com/#/">Reveal.js</a></li>
+</ul>
+</section></section>
+    </div>
+  </div>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+  <script src=".//lib/js/head.min.js"></script>
+  <script src=".//js/reveal.js"></script>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <script>
 
-		<script src="js/reveal.js"></script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				hash: true,
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/highlight/highlight.js' },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
-		</script>
-	</body>
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: './/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: './/plugin/zoom-js/zoom.js', async: true },
+          { src: './/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
 </html>
